@@ -15,19 +15,19 @@ const getNutrition = (ingredients) => {
     for (ingredient of ingredients) {
         ingredientStory += `${ingredient.quantity} ${ingredient.ingredient} and `
     };
-    $.ajax({
-            async: true,
-            crossDomain: true,
-            url: queryUrl,
-            method: 'POST',
-            headers: headerData,
-            data: JSON.stringify(
-                {
-                    "query": ingredientStory,
-                }
-            ),
-        })
-    .done(function(response) {
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: queryUrl,
+        method: 'POST',
+        headers: headerData,
+        data: JSON.stringify(
+            {
+                "query": ingredientStory,
+            }
+        ),
+    }
+    $.ajax(settings).done(function(response) {
         console.log(response);
     });
 };
