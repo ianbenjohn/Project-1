@@ -31,19 +31,19 @@
                 <div class="column is-4">
                     <!--Search box-->
                     <div class="notification is-primary is-size-3">
-                        <div class="field">
-                            <label class="label">Search for Recipes</label>
-                            <div class="control">
-                                <input type="text" class="input">
+                        <form id="search-form">
+                            <div class="field">
+                                <label class="label">Search for Recipes</label>
+                                <div class="control">
+                                    <input type="text" class="input" id="search-field">
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <!--Search history-->
                     <div class="hidden notification has-background-grey-lighter" id="search-history">
                         <span>Search History</span>
                         <ul id="search-history-list">
-                            <li>History Item 1</li>
-                            <li>History Item 2</li>
                         </ul>
                     </div>
                 </div>
@@ -95,5 +95,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/js/meal.js"></script>
     <script src="assets/js/nutritionix.js"></script>
+    <script src="assets/js/search_history.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

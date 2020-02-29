@@ -17,3 +17,6 @@
     flex-direction: column;
     width: 50%;
 }
+.hidden {
+    display: none;
+}
