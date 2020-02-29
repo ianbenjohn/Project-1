@@ -1,0 +1,20 @@
+
+.card{
+    height: auto;
+    width: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.imageDiv{
+    width:200px;
+    height: auto;
+}
+.infoDiv{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+}
+.hidden {
+    display: none;
+}
