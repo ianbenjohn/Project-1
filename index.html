@@ -52,7 +52,7 @@
                 </div>
                 <!--Display image and name and Ingredient section-->
                 <div class="column is-8">
-                    <div class="notification is-warning is-size-7"  >
+                    <div class="notification is-warning is-size-7" id="searchResults" style="display: none;">
                         <div class="columns" style="background-color: azure;">
                             <div class="column is-3">
                                 <a href="">
@@ -80,15 +80,42 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="notification is-default is-size-7" id="ingredientDiv" style="display: none;">
-                        <div class="card">
-                            <div class="imageDiv">
-                                <img src="https://media.istockphoto.com/photos/classic-taco-isolated-on-white-background-with-soft-shadow-picture-id172857632?k=6&m=172857632&s=612x612&w=0&h=Fwm32zhOMEJzlBa9SLE269xi4gaq0MUIeGZYNc_hfnQ=" alt="Food"/>
+                    <div class="notification is-default" id="recipe">
+                        <div class="columns">
+                            <div class="column is-3">
+                                <img id="recipe_img" src="https://www.themealdb.com/images/media/meals/xxyupu1468262513.jpg"/>
                             </div>
-                            <div class="infoDiv">
-                                <h3>Name:&nbsp;<span id="nameID"></span></h3>
-                                <h3>Ingredients:&nbsp;<span id="ingredientID"></span></h3>
+                            <div class="column is-9">
+                                <h3 id="title" class="title">Honey Teriyaki Salmon</h3>
+                                <div class="columns">
+                                    <div class="column is-3">
+                                        <ul id="measurement">
+                                            <li>1 lb</li>
+                                            <li>1 tablespoon</li>
+                                            <li>2 tablespoons</li>
+                                            <li>2 tablespoons</li>
+                                            <li>4 tablespoons</li>
+                                        </ul>
+                                    </div>
+                                    <div class="column is-4">
+                                        <ul id="ingredient">
+                                            <li>Salmon</li>
+                                            <li>Olive oil</li>
+                                            <li>Soy Sauce</li>
+                                            <li>Sake</li>
+                                            <li>Sesame Seed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
                             </div>
+                        </div>
+                        <div class="columns">
+                            <p id="instructions">Mix all the ingredients in the Honey Teriyaki Glaze together. Whisk to blend well. Combine the salmon and the Glaze together.
+
+                                Heat up a skillet on medium-low heat. Add the oil, Pan-fry the salmon on both sides until it’s completely cooked inside and the glaze thickens.
+                                
+                                Garnish with sesame and serve immediately.</p>
                         </div>
                     </div>
                 </div>
