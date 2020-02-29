@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <title>Project-1</title>
 </head>
@@ -28,6 +28,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-4">
+                    <!--Search box-->
                     <div class="notification is-primary is-size-3">
                         <div class="field">
                             <label class="label">Search for Recipes</label>
@@ -35,7 +36,14 @@
                                 <input type="text" class="input">
                             </div>
                         </div>
-                    
+                    </div>
+                    <!--Search history-->
+                    <div class="hidden notification has-background-grey-lighter" id="search-history">
+                        <span>Search History</span>
+                        <ul id="search-history-list">
+                            <li>History Item 1</li>
+                            <li>History Item 2</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="column is-8">
