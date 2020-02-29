@@ -4,6 +4,9 @@
     width: 600px;
     display: flex;
     justify-content: space-evenly;
+    padding-bottom: 50px;
+    padding-top: 30px;
+
 }
 .imageDiv{
     width:200px;
