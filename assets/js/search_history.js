@@ -12,7 +12,7 @@ const displaySearchHistory = (newSearchTerm) => {
     /* Check if search history already includes this term */
     if (searchHistory.includes(newSearchTerm)) {
         return;
-    } else if (newSearchTerm != null) {
+    } else if (newSearchTerm && newSearchTerm.length > 0) {
         /* If there is a new term, add it to the search history */
         searchHistory.push(newSearchTerm);
         localStorage.setItem('search_history', JSON.stringify(searchHistory));
