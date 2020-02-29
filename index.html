@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <title>Project-1</title>
 </head>
@@ -29,19 +29,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-4">
+                    <!--Search box-->
                     <div class="notification is-primary is-size-3">
-                        <label class="label">Search Recipe:</label>
-                        <div class="field is-grouped">
-                            <p class="control is-expanded">
-                              <input class="input" type="text" placeholder="Find a Recipe">
-                            </p>
-                            <p class="control">
-                              <a class="button is-info">
-                                Search
-                              </a>
-                            </p>
-                          </div>
-                    
+                        <div class="field">
+                            <label class="label">Search for Recipes</label>
+                            <div class="control">
+                                <input type="text" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <!--Search history-->
+                    <div class="hidden notification has-background-grey-lighter" id="search-history">
+                        <span>Search History</span>
+                        <ul id="search-history-list">
+                            <li>History Item 1</li>
+                            <li>History Item 2</li>
+                        </ul>
                     </div>
                 </div>
                 <!--Display image and name and Ingredient section-->
