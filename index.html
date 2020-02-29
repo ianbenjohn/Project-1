@@ -31,15 +31,17 @@
                 <div class="column is-4">
                     <!--Search box-->
                     <div class="notification is-primary is-size-3">
-                        <label class="label">Recipe Search</label>
-                        <div class="field has-addons">
-                            <div class="control">
-                              <input class="input" type="text" placeholder="Search for Recipe">
+                        <form id="search-form">
+                            <label class="label">Recipe Search</label>
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Search for Recipe" id="search-field">
+                                </div>
+                                <div class="control">
+                                    <a class="button is-info" id="search-button">Search</a>
+                                </div>
                             </div>
-                            <div class="control">
-                              <a class="button is-info" id="search-button">Search</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <!--Search history-->
                     <div class="hidden notification has-background-grey-lighter" id="search-history">
