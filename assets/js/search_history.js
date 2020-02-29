@@ -1,0 +1,4 @@
+/* Search history function
+Works with localStorage to keep the history list updated on new page loads
+Also connects to search button and form submit
+*/
