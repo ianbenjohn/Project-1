@@ -8,18 +8,21 @@ const displaySearchHistory = (newSearchTerm) => {
     const searchHistoryList = $('#search-history-list');
     let searchHistory = [];
     if (localStorage.getItem('search_history')) {
-        searchHistory = localStorage.getItem('search_history');
+        searchHistory = JSON.parse(localStorage.getItem('search_history'));
+        $('#search-history').removeClass('hidden');
     };
 
-    if (searchHistory.includes(newSearchTerm) {
+    if (searchHistory.includes(newSearchTerm)) {
         return;
-    } else {
+    } else if (newSearchTerm != null) {
         searchHistory.push(newSearchTerm);
-        localStorage.setItem('search_history', searchHistory);
+        localStorage.setItem('search_history', JSON.stringify(searchHistory));
     };
 
-    for (searchTerm of searchHistory) {
+    searchHistoryList.empty();
+    for (let i=0; i<searchHistory.length; i++) {
         const searchTermElement = $('<li>');
-        searchTermElement.text(searchTerm);
-    }
+        searchTermElement.text(searchHistory[i]);
+        searchHistoryList.append(searchTermElement);
+    };
 }
