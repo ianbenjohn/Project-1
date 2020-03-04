@@ -10,7 +10,8 @@ const mealSearch = (search) => {
         mealsArray = response.meals;
         // console.log(mealsArray);
         /* display meal options from user search */
-        $('#recipe-results').empty();
+        $('#search-results').empty();
+        $('#search-results-container').attr('style', 'display: block;');
         for (obj of mealsArray){
             // console.log(obj);
             // console.log("Meal ID: " + obj.idMeal);
@@ -23,7 +24,7 @@ const mealSearch = (search) => {
             recipeImg.attr('src', obj.strMealThumb);
             const recipePara = $('<p>').text(obj.strMeal);
             /* Place the new elements for the recipe on the page */
-            $('#recipe-results').append(recipeElement);
+            $('#search-results').append(recipeElement);
             recipeElement.append(recipeLink);
             recipeLink.append(recipeImg);
             recipeLink.append(recipePara);
