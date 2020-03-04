@@ -8,14 +8,21 @@ const mealSearch = (searchTerm) => {
         method: "GET"
     }).then(function(response){
         mealsArray = response.meals;
-        console.log(mealsArray);
+        // console.log(mealsArray);
         /* display meal options from user search */
         $('#search-results').empty();
         $('#search-results-container').attr('style', 'display: block;');
+        
+        /* Get a reference to the search history element for this search */
+
         if (mealsArray === null) {
             const searchFailedMsg = $('<p>').text('Sorry, no results were found. Try another search.');
             $('#search-results').append(searchFailedMsg);
         } else {
+            //console.log(mealsArray);
+            displaySearchHistory(searchTerm);
+            const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
+
             /* Update search history listing with count of recipes returned */
             const recipesReturnedCount = `${searchTerm} (${mealsArray.length})`;
             // console.log(searchTerm);
@@ -26,10 +33,9 @@ const mealSearch = (searchTerm) => {
             /* Save the history again */
             localStorage.setItem('search_history', JSON.stringify(searchHistory));
 
-            const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
             // console.log(historyElement);
             historyElement.innerHTML = recipesReturnedCount;
-
+            
             /* Print each search result */
             for (obj of mealsArray){
                 // console.log(obj);

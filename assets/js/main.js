@@ -17,7 +17,6 @@ $(document).ready(function() {
 
     /* Helper function to run the search */
     const runSearch = (searchTerm) => {
-        displaySearchHistory(searchTerm);
         mealSearch(searchTerm);
     };
 });
