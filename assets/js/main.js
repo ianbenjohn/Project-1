@@ -17,5 +17,6 @@ $(document).ready(function() {
     const runSearch = () => {
         let searchTerm = $('#search-field').val();
         displaySearchHistory(searchTerm);
+        mealSearch(searchTerm);
     };
 });
