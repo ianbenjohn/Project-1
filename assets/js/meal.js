@@ -19,7 +19,14 @@ const mealSearch = (searchTerm) => {
             /* Update search history listing with count of recipes returned */
             const recipesReturnedCount = `${searchTerm} (${mealsArray.length})`;
             // console.log(searchTerm);
-            let historyElement = document.querySelector('[data-search=' + searchTerm + ']');
+            /* Get the search history object and update the count for this search */
+            let searchHistory = JSON.parse(localStorage.getItem('search_history'));
+            searchHistory[searchTerm].text = recipesReturnedCount;
+            // console.log(searchHistory[searchTerm]);
+            /* Save the history again */
+            localStorage.setItem('search_history', JSON.stringify(searchHistory));
+
+            const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
             // console.log(historyElement);
             historyElement.innerHTML = recipesReturnedCount;
 

@@ -31,7 +31,8 @@ const updateSearchHistoryList = (searchHistory) => {
     searchHistoryList.empty();
     for (let i=0; i<Object.keys(searchHistory).length; i++) {
         const searchTerm = Object.keys(searchHistory)[i];
-        console.log(Object.keys(searchHistory)[i]);
+        // console.log(Object.keys(searchHistory)[i]);
+        // console.log(searchHistory[searchTerm]);
         const searchTermElement = $('<li>').attr('data-search', searchTerm)
 
         /* Fancy feedback so the user knows that these are links */
@@ -42,7 +43,7 @@ const updateSearchHistoryList = (searchHistory) => {
             $(this).removeClass('has-background-dark has-text-light');
         });
 
-        searchTermElement.text(`${searchTerm}`);
+        searchTermElement.text(`${searchHistory[searchTerm].text}`);
         searchHistoryList.append(searchTermElement);
         searchTermElement.on('click', function() {
             mealSearch($(this).attr('data-search'));
