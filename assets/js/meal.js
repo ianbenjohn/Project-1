@@ -1,81 +1,110 @@
 let search;
 let mealsArray = [];
 let mealSelectionArray = [];
+const searchContainerEl = $('#search-results-container');
+const recipeEl = $("#recipe");
 
 const mealSearch = (searchTerm) => {
     $.ajax({
         url: "https://www.themealdb.com/api/json/v1/1/search.php?s="+searchTerm,
         method: "GET"
     }).then(function(response){
+        let searchResultEl = $('#search-results');
         mealsArray = response.meals;
-        // console.log(mealsArray);
+
         /* display meal options from user search */
-        $('#search-results').empty();
-        $('#search-results-container').attr('style', 'display: block;');
-        
+        searchResultEl.empty();
+        searchContainerEl.css('display: block;');
+        recipeEl.css("display: none;");
+  
         /* Get a reference to the search history element for this search */
 
         if (mealsArray === null) {
             const searchFailedMsg = $('<p>').text('Sorry, no results were found. Try another search.');
             $('#search-results').append(searchFailedMsg);
         } else {
-            //console.log(mealsArray);
             displaySearchHistory(searchTerm);
             const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
 
             /* Update search history listing with count of recipes returned */
             const recipesReturnedCount = `${searchTerm} (${mealsArray.length})`;
-            // console.log(searchTerm);
+          
             /* Get the search history object and update the count for this search */
             let searchHistory = JSON.parse(localStorage.getItem('search_history'));
             searchHistory[searchTerm].text = recipesReturnedCount;
-            // console.log(searchHistory[searchTerm]);
+          
             /* Save the history again */
             localStorage.setItem('search_history', JSON.stringify(searchHistory));
 
-            // console.log(historyElement);
             historyElement.innerHTML = recipesReturnedCount;
             
             /* Print each search result */
-            for (obj of mealsArray){
-                // console.log(obj);
-                // console.log("Meal ID: " + obj.idMeal);
-                // console.log("Meal title: " + obj.strMeal);
-                // console.log("Meal thumbnail: " + obj.strMealThumb);
-    
-                const recipeElement = $('<div>').attr('class', 'column is-3');
-                const recipeLink = $('<a>');
-                const recipeImg = $('<img>').attr('width', '200');
-                recipeImg.attr('src', obj.strMealThumb);
-                const recipePara = $('<p>').text(obj.strMeal);
-
+            for (obj of mealsArray) {
+                const resultElement = $('<div>').attr('class', 'column is-3');
+                const resultLink = $('<a id="' + obj.idMeal + '">');
+                const resultImg = $('<img>').attr('width', '200');
+                resultImg.attr('src', obj.strMealThumb);
+                const resultPara = $('<p>').text(obj.strMeal);
+              
+                resultLink.attr("onclick", "recipeSelected(event)");
+                resultLink.append(resultImg);
+                resultLink.append(resultPara);
+                resultElement.append(resultLink);
+              
                 /* Place the new elements for the recipe on the page */
-                $('#search-results').append(recipeElement);
-                recipeElement.append(recipeLink);
-                recipeLink.append(recipeImg);
-                recipeLink.append(recipePara);
+                $('#search-results').append(resultElement);
             };
         }
-        //hook to ingredients list
-        //mealSelection("52773");
     });
 };
 
+
+function recipeSelected(event) {
+    // need to determine what was selected since the event doesn't capture the anchor tag
+    if(event.target.localName === "img" || event.target.localName === "p"){
+        mealSelection(event.target.parentNode.id);
+    }else{
+        mealSelection(event.target.id);
+    }    
+}
+
 const mealSelection = (selMealID) => {
     let selMealObj = mealsArray.find(mealsArray => mealsArray.idMeal === selMealID);
+    var mealTitleEl = $("#title");
+    var mealImgEl = $("#recipe_img");
+    var ingredientEl = $("#ingredient");
+    var measurementEl = $("#measurement");
+    var instructionsEl = $("#instructions");
 
-    console.log("Meal title: " + selMealObj.strMeal);
-    console.log("Meal thumbnail: " + selMealObj.strMealThumb);
+    searchContainerEl.css('display: none;');
+    recipeEl.css("display: block;");
+    ingredientEl.empty();
+    measurementEl.empty();
+
+    mealTitleEl.text(selMealObj.strMeal);
+    mealImgEl.attr("src", selMealObj.strMealThumb);
+
+    instructionsEl.text(selMealObj.strInstructions);
+    
     for (let i = 1; i <= 20; i++){
         const ingredient = selMealObj["strIngredient" + i];
         const measurement = selMealObj["strMeasure" + i];
+
         if(ingredient !== "" && ingredient !== null){
-            console.log("Ingredient: " + measurement + " of " + ingredient);
+            var ingredientListItem = $("<li>");
+
+            ingredientListItem.text(ingredient);
+            ingredientEl.append(ingredientListItem);
+            
+            var measurementListItem = $("<li>");
+            
+            measurementListItem.text(measurement);
+            measurementEl.append(measurementListItem);
+
             mealSelectionArray.push({"ingredient": ingredient, "quantity": measurement});
+        }else{
+            break;
         };
     };
-};
-
-const getIngredientListArray = () => {
-    return mealSelectionArray;
+    getNutrition(mealSelectionArray);
 };
