@@ -2,19 +2,31 @@ let search;
 let mealsArray = [];
 let mealSelectionArray = [];
 
-const mealSearch = (searchTerm) => {
+const mealSearch = (search) => {
     $.ajax({
         url: "https://www.themealdb.com/api/json/v1/1/search.php?s="+search,
         method: "GET"
     }).then(function(response){
         mealsArray = response.meals;
-        console.log(mealsArray);
-        //display meal options from user search
-        for (obj in mealsArray){
-            console.log(obj);
-            console.log("Meal ID: " + obj.idMeal);
-            console.log("Meal title: " + obj.strMeal);
-            console.log("Meal thumbnail: " + obj.strMealThumb);
+        // console.log(mealsArray);
+        /* display meal options from user search */
+        $('#recipe-results').empty();
+        for (obj of mealsArray){
+            // console.log(obj);
+            // console.log("Meal ID: " + obj.idMeal);
+            // console.log("Meal title: " + obj.strMeal);
+            // console.log("Meal thumbnail: " + obj.strMealThumb);
+
+            const recipeElement = $('<div>').attr('class', 'column is-3');
+            const recipeLink = $('<a>');
+            const recipeImg = $('<img>').attr('width', '200');
+            recipeImg.attr('src', obj.strMealThumb);
+            const recipePara = $('<p>').text(obj.strMeal);
+            /* Place the new elements for the recipe on the page */
+            $('#recipe-results').append(recipeElement);
+            recipeElement.append(recipeLink);
+            recipeLink.append(recipeImg);
+            recipeLink.append(recipePara);
         };
         //hook to ingredients list
         //mealSelection("52773");
