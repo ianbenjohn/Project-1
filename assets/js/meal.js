@@ -20,15 +20,38 @@ $.ajax({
 
 function mealSelection(selMealID){
     var selMealObj = mealsArray.find(mealsArray => mealsArray.idMeal === selMealID);
+    var mealTitleEl = $("#title");
+    var mealImgEl = $("#recipe_img");
+    var instructionsEl = $("#instructions");
 
+    mealTitleEl.text(selMealObj.strMeal);
     console.log("Meal title: " + selMealObj.strMeal);
+    mealImgEl.attr("src", selMealObj.strMealThumb);
     console.log("Meal thumbnail: " + selMealObj.strMealThumb);
+    instructionsEl.text(selMealObj.strInstructions);
+    
     for (var i = 1; i <= 20; i++){
         var ingredient = selMealObj["strIngredient" + i];
+        
         var measurement = selMealObj["strMeasure" + i];
+        
         if(ingredient !== "" && ingredient !== null){
             console.log("Ingredient: " + measurement + " of " + ingredient);
+            var ingredientEl = $("#ingredient");
+            var ingredientListItem = $("<li>");
+
+            ingredientListItem.text(ingredient);
+            ingredientEl.append(ingredientListItem);
+
+            var measurementEl = $("#measurement");
+            var measurementListItem = $("<li>");
+            
+            measurementListItem.text(measurement);
+            measurementEl.append(measurementListItem);
+
             mealSelectionArray.push({"ingredient": ingredient, "quantity": measurement});
+        }else{
+            break;
         }
     }
 }
