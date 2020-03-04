@@ -1,50 +1,63 @@
 let search;
 let mealsArray = [];
 let mealSelectionArray = [];
+let searchContainerEl = $('#search-results-container');
+let recipeEl = $("#recipe");
 
 const mealSearch = (search) => {
     $.ajax({
         url: "https://www.themealdb.com/api/json/v1/1/search.php?s="+search,
         method: "GET"
     }).then(function(response){
+        let searchResultEl = $('#search-results');
         mealsArray = response.meals;
-        // console.log(mealsArray);
-        /* display meal options from user search */
-        $('#search-results').empty();
-        $('#search-results-container').attr('style', 'display: block;');
-        for (obj of mealsArray){
-            // console.log(obj);
-            // console.log("Meal ID: " + obj.idMeal);
-            // console.log("Meal title: " + obj.strMeal);
-            // console.log("Meal thumbnail: " + obj.strMealThumb);
 
-            const recipeElement = $('<div>').attr('class', 'column is-3');
-            const recipeLink = $('<a>');
-            const recipeImg = $('<img>').attr('width', '200');
-            recipeImg.attr('src', obj.strMealThumb);
-            const recipePara = $('<p>').text(obj.strMeal);
+        /* display meal options from user search */
+        searchResultEl.empty();
+        searchContainerEl.attr('style', 'display: block;');
+        recipeEl.attr("style", "display: none;");
+        
+        for (obj of mealsArray){
+            const resultElement = $('<div>').attr('class', 'column is-3');
+            const resultLink = $('<a id="' + obj.idMeal + '">');
+            const resultImg = $('<img>').attr('width', '200');
+            resultImg.attr('src', obj.strMealThumb);
+            const resultPara = $('<p>').text(obj.strMeal);
+            
+            resultLink.attr("onclick", "recipeSelected(event)");
+            resultLink.append(resultImg);
+            resultLink.append(resultPara);
+            resultElement.append(resultLink);
             /* Place the new elements for the recipe on the page */
-            $('#search-results').append(recipeElement);
-            recipeElement.append(recipeLink);
-            recipeLink.append(recipeImg);
-            recipeLink.append(recipePara);
+            $('#search-results').append(resultElement);
         };
-        //hook to ingredients list
-        //mealSelection("52773");
     });
 };
 
+
+function recipeSelected(event) {
+    if(event.target.localName === "img" || event.target.localName === "p"){
+        mealSelection(event.target.parentNode.id);
+    }else{
+        mealSelection(event.target.id);
+    }    
+}
 
 const mealSelection = (selMealID) => {
     let selMealObj = mealsArray.find(mealsArray => mealsArray.idMeal === selMealID);
     var mealTitleEl = $("#title");
     var mealImgEl = $("#recipe_img");
+    var ingredientEl = $("#ingredient");
+    var measurementEl = $("#measurement");
     var instructionsEl = $("#instructions");
 
+    searchContainerEl.attr('style', 'display: none;');
+    recipeEl.attr("style", "display: block;");
+    ingredientEl.empty();
+    measurementEl.empty();
+
     mealTitleEl.text(selMealObj.strMeal);
-    console.log("Meal title: " + selMealObj.strMeal);
     mealImgEl.attr("src", selMealObj.strMealThumb);
-    console.log("Meal thumbnail: " + selMealObj.strMealThumb);
 
     instructionsEl.text(selMealObj.strInstructions);
     
@@ -53,14 +66,11 @@ const mealSelection = (selMealID) => {
         const measurement = selMealObj["strMeasure" + i];
 
         if(ingredient !== "" && ingredient !== null){
-            console.log("Ingredient: " + measurement + " of " + ingredient);
-            var ingredientEl = $("#ingredient");
             var ingredientListItem = $("<li>");
 
             ingredientListItem.text(ingredient);
             ingredientEl.append(ingredientListItem);
-
-            var measurementEl = $("#measurement");
+            
             var measurementListItem = $("<li>");
             
             measurementListItem.text(measurement);
@@ -71,8 +81,5 @@ const mealSelection = (selMealID) => {
             break;
         };
     };
-};
-
-const getIngredientListArray = () => {
-    return mealSelectionArray;
+    getNutrition(mealSelectionArray);
 };
