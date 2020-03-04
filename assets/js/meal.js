@@ -15,7 +15,7 @@ const mealSearch = (searchTerm) => {
         /* display meal options from user search */
         searchResultEl.empty();
         searchContainerEl.css('display: block;');
-        recipeEl.attr("style", "display: none;");
+        recipeEl.css("display: none;");
   
         /* Get a reference to the search history element for this search */
 
@@ -60,6 +60,7 @@ const mealSearch = (searchTerm) => {
 
 
 function recipeSelected(event) {
+    // need to determine what was selected since the event doesn't capture the anchor tag
     if(event.target.localName === "img" || event.target.localName === "p"){
         mealSelection(event.target.parentNode.id);
     }else{
@@ -75,8 +76,8 @@ const mealSelection = (selMealID) => {
     var measurementEl = $("#measurement");
     var instructionsEl = $("#instructions");
 
-    searchContainerEl.attr('style', 'display: none;');
-    recipeEl.attr("style", "display: block;");
+    searchContainerEl.css('display: none;');
+    recipeEl.css("display: block;");
     ingredientEl.empty();
     measurementEl.empty();
 
