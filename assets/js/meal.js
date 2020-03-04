@@ -14,8 +14,8 @@ const mealSearch = (searchTerm) => {
 
         /* display meal options from user search */
         searchResultEl.empty();
-        searchContainerEl.css('display: block;');
-        recipeEl.css("display: none;");
+        searchContainerEl.css('display', 'block');
+        recipeEl.css('display', 'none');
   
         /* Get a reference to the search history element for this search */
 
