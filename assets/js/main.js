@@ -5,18 +5,18 @@ $(document).ready(function() {
     /* Event listener for submitting search form directly */
     $('#search-form').on('submit', function(event) {
         event.preventDefault();
-        runSearch();
+        let searchTerm = $('#search-field').val();
+        runSearch(searchTerm);
     });
 
     /* Event listener for clicking on search button */
     $('#search-button').on('click', function(event) {
-        runSearch();
+        let searchTerm = $('#search-field').val();
+        runSearch(searchTerm);
     });
 
     /* Helper function to run the search */
-    const runSearch = () => {
-        let searchTerm = $('#search-field').val();
-        displaySearchHistory(searchTerm);
+    const runSearch = (searchTerm) => {
         mealSearch(searchTerm);
     };
 });

@@ -1,12 +1,12 @@
 let search;
 let mealsArray = [];
 let mealSelectionArray = [];
-let searchContainerEl = $('#search-results-container');
-let recipeEl = $("#recipe");
+const searchContainerEl = $('#search-results-container');
+const recipeEl = $("#recipe");
 
-const mealSearch = (search) => {
+const mealSearch = (searchTerm) => {
     $.ajax({
-        url: "https://www.themealdb.com/api/json/v1/1/search.php?s="+search,
+        url: "https://www.themealdb.com/api/json/v1/1/search.php?s="+searchTerm,
         method: "GET"
     }).then(function(response){
         let searchResultEl = $('#search-results');
@@ -14,23 +14,47 @@ const mealSearch = (search) => {
 
         /* display meal options from user search */
         searchResultEl.empty();
-        searchContainerEl.attr('style', 'display: block;');
+        searchContainerEl.css('display: block;');
         recipeEl.attr("style", "display: none;");
-        
-        for (obj of mealsArray){
-            const resultElement = $('<div>').attr('class', 'column is-3');
-            const resultLink = $('<a id="' + obj.idMeal + '">');
-            const resultImg = $('<img>').attr('width', '200');
-            resultImg.attr('src', obj.strMealThumb);
-            const resultPara = $('<p>').text(obj.strMeal);
+  
+        /* Get a reference to the search history element for this search */
+
+        if (mealsArray === null) {
+            const searchFailedMsg = $('<p>').text('Sorry, no results were found. Try another search.');
+            $('#search-results').append(searchFailedMsg);
+        } else {
+            displaySearchHistory(searchTerm);
+            const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
+
+            /* Update search history listing with count of recipes returned */
+            const recipesReturnedCount = `${searchTerm} (${mealsArray.length})`;
+          
+            /* Get the search history object and update the count for this search */
+            let searchHistory = JSON.parse(localStorage.getItem('search_history'));
+            searchHistory[searchTerm].text = recipesReturnedCount;
+          
+            /* Save the history again */
+            localStorage.setItem('search_history', JSON.stringify(searchHistory));
+
+            historyElement.innerHTML = recipesReturnedCount;
             
-            resultLink.attr("onclick", "recipeSelected(event)");
-            resultLink.append(resultImg);
-            resultLink.append(resultPara);
-            resultElement.append(resultLink);
-            /* Place the new elements for the recipe on the page */
-            $('#search-results').append(resultElement);
-        };
+            /* Print each search result */
+            for (obj of mealsArray) {
+                const resultElement = $('<div>').attr('class', 'column is-3');
+                const resultLink = $('<a id="' + obj.idMeal + '">');
+                const resultImg = $('<img>').attr('width', '200');
+                resultImg.attr('src', obj.strMealThumb);
+                const resultPara = $('<p>').text(obj.strMeal);
+              
+                resultLink.attr("onclick", "recipeSelected(event)");
+                resultLink.append(resultImg);
+                resultLink.append(resultPara);
+                resultElement.append(resultLink);
+              
+                /* Place the new elements for the recipe on the page */
+                $('#search-results').append(resultElement);
+            };
+        }
     });
 };
 
