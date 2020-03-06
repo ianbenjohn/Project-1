@@ -20,6 +20,7 @@ const displaySearchHistory = (newSearchTerm) => {
 
     /* If the search history is not empty, show it on page */
     if (Object.keys(searchHistory).length > 0) {
+        $('#search-history-help').addClass('hidden');
         updateSearchHistoryList(searchHistory);
     }
 };
