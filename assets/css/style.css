@@ -1,13 +1,3 @@
-
-.imageDiv{
-    width:200px;
-    height: auto;
-}
-.infoDiv{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
 .hidden {
     display: none;
 }
@@ -15,3 +5,27 @@
 #measurement, #ingredient{
     list-style-type: none;
 }
+
+.titleHero{
+    display: flex;
+    justify-content: space-between;
+}
+
+#wallaby{
+    border: coral 2px ridge;
+}
+
+#titleWallaby{
+    position: relative ;
+    top: 20px;
+    color: coral;
+}
+#subHead{
+    position: relative;
+    top: -65px;
+}
+.hero-body{
+    padding-bottom: 0px;
+    padding-top: 30px;
+}
+
