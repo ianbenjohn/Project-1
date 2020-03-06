@@ -61,7 +61,6 @@ const mealSearch = (searchTerm) => {
 function recipeSelected(event) {
     // need to determine what was selected since the event doesn't capture the anchor tag
     if(event.target.localName === "img" || event.target.localName === "p"){
-        console.log('foobarbaz');
         mealSelection(event.target.parentNode.id);
     }else{
         mealSelection(event.target.id);

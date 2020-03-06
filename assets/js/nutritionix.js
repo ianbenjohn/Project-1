@@ -92,7 +92,6 @@ const printIngredients = (ingredientResponse) => {
         const foodGroup = foodGroups[ingredientResponse.foods[i].tags.food_group]
         const foodGroupEl = $('<td>').text(foodGroup);
         nutritionIngredientRow.append(foodGroupEl);
-        console.log(nutritionIngredientRow);
         nutritionBodyEl.append(nutritionIngredientRow); 
     };
 
