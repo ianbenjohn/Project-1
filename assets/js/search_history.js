@@ -20,8 +20,8 @@ const displaySearchHistory = (newSearchTerm) => {
 
     /* If the search history is not empty, show it on page */
     if (Object.keys(searchHistory).length > 0) {
+        $('#search-history-help').addClass('hidden');
         updateSearchHistoryList(searchHistory);
-        $('#search-history').removeClass('hidden');
     }
 };
 
@@ -31,8 +31,6 @@ const updateSearchHistoryList = (searchHistory) => {
     searchHistoryList.empty();
     for (let i=0; i<Object.keys(searchHistory).length; i++) {
         const searchTerm = Object.keys(searchHistory)[i];
-        // console.log(Object.keys(searchHistory)[i]);
-        // console.log(searchHistory[searchTerm]);
         const searchTermElement = $('<li>').attr('data-search', searchTerm)
 
         /* Fancy feedback so the user knows that these are links */
