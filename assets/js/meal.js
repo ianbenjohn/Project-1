@@ -61,7 +61,6 @@ const mealSearch = (searchTerm) => {
 function recipeSelected(event) {
     // need to determine what was selected since the event doesn't capture the anchor tag
     if(event.target.localName === "img" || event.target.localName === "p"){
-        console.log('foobarbaz');
         mealSelection(event.target.parentNode.id);
     }else{
         mealSelection(event.target.id);
@@ -72,11 +71,12 @@ const mealSelection = (selMealID) => {
     let mealSelectionArray = [];
 
     let selMealObj = mealsArray.find(mealsArray => mealsArray.idMeal === selMealID);
-    var mealTitleEl = $("#title");
-    var mealImgEl = $("#recipe_img");
-    var ingredientEl = $("#ingredient");
-    var measurementEl = $("#measurement");
-    var instructionsEl = $("#instructions");
+    const mealTitleEl = $("#title");
+    const mealVideoEl = $("#video");
+    const mealImgEl = $("#recipe_img");
+    const ingredientEl = $("#ingredient");
+    const measurementEl = $("#measurement");
+    const instructionsEl = $("#instructions");
 
     /* Hide search results and show recipe */
     searchContainerEl.css('display', 'none');
@@ -85,6 +85,11 @@ const mealSelection = (selMealID) => {
     measurementEl.empty();
 
     mealTitleEl.text(selMealObj.strMeal);
+
+    /* Get the Youtube code from the video link */
+    const videoCode = selMealObj.strYoutube.split('=')[1];
+    mealVideoEl.html(`<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoCode}"></iframe>`);
+
     mealImgEl.attr("src", selMealObj.strMealThumb);
 
     instructionsEl.text(selMealObj.strInstructions);
@@ -94,18 +99,18 @@ const mealSelection = (selMealID) => {
         const measurement = selMealObj["strMeasure" + i];
 
         if(ingredient !== "" && ingredient !== null){
-            var ingredientListItem = $("<li>");
+            const ingredientListItem = $("<li>");
 
             ingredientListItem.text(ingredient);
             ingredientEl.append(ingredientListItem);
             
-            var measurementListItem = $("<li>");
+            const measurementListItem = $("<li>");
             
             measurementListItem.text(measurement);
             measurementEl.append(measurementListItem);
 
             mealSelectionArray.push({"ingredient": ingredient, "quantity": measurement});
-        }else{
+        } else {
             break;
         };
     };
