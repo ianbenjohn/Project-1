@@ -17,12 +17,14 @@
 
 #titleWallaby{
     position: relative ;
-    top: 20px;
+    top: 10px;
     color: coral;
+    font-size: 35px;
+    font-weight: bolder;
 }
 #subHead{
     position: relative;
-    top: -65px;
+    top: -45px;
 }
 .hero-body{
     padding-bottom: 0px;
