@@ -23,7 +23,7 @@ const mealSearch = (searchTerm) => {
             $('#search-results').append(searchFailedMsg);
         } else {
             displaySearchHistory(searchTerm);
-            const historyElement = document.querySelector('[data-search=' + searchTerm + ']');
+            const historyElement = $("li[data-search|=' + searchTerm + ']");
 
             /* Update search history listing with count of recipes returned */
             const recipesReturnedCount = `${searchTerm} (${mealsArray.length})`;
