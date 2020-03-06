@@ -1,6 +1,5 @@
 let search;
 let mealsArray = [];
-let mealSelectionArray = [];
 const searchContainerEl = $('#search-results-container');
 const recipeEl = $("#recipe");
 
@@ -62,6 +61,7 @@ const mealSearch = (searchTerm) => {
 function recipeSelected(event) {
     // need to determine what was selected since the event doesn't capture the anchor tag
     if(event.target.localName === "img" || event.target.localName === "p"){
+        console.log('foobarbaz');
         mealSelection(event.target.parentNode.id);
     }else{
         mealSelection(event.target.id);
@@ -69,6 +69,8 @@ function recipeSelected(event) {
 }
 
 const mealSelection = (selMealID) => {
+    let mealSelectionArray = [];
+
     let selMealObj = mealsArray.find(mealsArray => mealsArray.idMeal === selMealID);
     var mealTitleEl = $("#title");
     var mealImgEl = $("#recipe_img");
@@ -76,8 +78,9 @@ const mealSelection = (selMealID) => {
     var measurementEl = $("#measurement");
     var instructionsEl = $("#instructions");
 
-    searchContainerEl.css('display: none;');
-    recipeEl.css("display: block;");
+    /* Hide search results and show recipe */
+    searchContainerEl.css('display', 'none');
+    recipeEl.css('display', 'block');
     ingredientEl.empty();
     measurementEl.empty();
 
