@@ -39,7 +39,6 @@ const mealSearch = (searchTerm) => {
             
             /* Print each search result */
             for (obj of mealsArray) {
-                console.log(obj);
                 const resultElement = $('<div>').attr('class', 'column is-3');
                 const resultLink = $('<a id="' + obj.idMeal + '">');
                 const resultImg = $('<img>').attr('width', '200');
