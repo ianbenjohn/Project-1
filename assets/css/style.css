@@ -6,7 +6,7 @@
     list-style-type: none;
 }
 
-.title{
+.titleHero{
     display: flex;
     justify-content: space-between;
 }
